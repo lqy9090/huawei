@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
-public class test {
+public class quickSorttest {
     public static void quickSort(int[] arr,int low,int high){
         int i,j,temp,t;
         if(low>high){
