@@ -1,7 +1,6 @@
-import java.util.Arrays;
 import java.util.HashMap;
 
-public class Solution {
+public class towSumNc61 {
 
     /**
      *
@@ -25,8 +24,9 @@ public class Solution {
     }
 
     public int jumpFloor(int target) {
+        if(target ==0) return 0;
         int a=0,b=1,sum=0;
-        for (int i = 0; i < target; i++) {
+        for (int i = 0; i <= target; i++) {
             sum = a+b;
             a = b;
             b = sum;
@@ -36,7 +36,7 @@ public class Solution {
 
     public static void main(String[] args) {
 
-        Solution solution = new Solution();
+        towSumNc61 solution = new towSumNc61();
 //        int[] numbers = {-3,4,3,90};
 //        int[] ints = solution.twoSum(numbers, 0);
 //        System.out.println(Arrays.toString(ints));
