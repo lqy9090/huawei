@@ -7,8 +7,8 @@ public class minWindowNc28 {
         int left =0, right = 0;
         //start-最后结果字符串开始位置，minLen-最后字符串长度
         int start = 0, minLen = Integer.MAX_VALUE;
-        HashMap<Character, Integer> need = new HashMap<>(); //T的所有字符的统计
-        HashMap<Character, Integer> window = new HashMap<>(); //窗口中出现need中的字符统计
+        HashMap<Character, Integer> need = new HashMap<>(); //T的所有字符以及他们的个数
+        HashMap<Character, Integer> window = new HashMap<>(); //窗口的所有字符以及它们的个数，如果包含need的所有字符，并且对应个数都不小于各字符个数,则是可行的
         for (int i = 0; i < T.length(); i++) {
             char c = T.charAt(i);
             need.put(c, need.getOrDefault(c, 0) + 1);
@@ -23,13 +23,16 @@ public class minWindowNc28 {
                 if (window.get(ch).equals(need.get(ch))) match++;
             }
             right++;
+
+            //当且仅当已有字符串已经包含了所有目标字符串的字符，且出现频次一定大于或等于指定频次
             while (match == need.size()) {
-                //当匹配度等于need.size()
+                //当窗口的长度比已有的最短值小时，更改最小值，并记录起始位置
                 if (right - left < minLen) {
                     minLen = right - left;
                     start = left;
                 }
                 char ch2 = S.charAt(left);
+                //如果左边即将要去掉的字符被目标字符串需要
                 if (need.containsKey(ch2)) {
                     window.put(ch2, window.getOrDefault(ch2, 0) - 1);
                     if (window.get(ch2) < need.get(ch2)) match--;
