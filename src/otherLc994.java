@@ -1,3 +1,6 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class otherLc994 {
     public int orangesRottingFei(int[][] grid) {//向上传递失败
         int minute = 0;
@@ -57,8 +60,54 @@ public class otherLc994 {
     }
 
     public int orangesRotting(int[][] grid) {
-        int minute = 0;
-        return minute;
+        int M = grid.length;
+        int N = grid[0].length;
+        Queue<int[]> queue = new LinkedList<>();
+
+        int count = 0;
+        for (int r = 0; r < M; r++) {
+            for (int c = 0; c < N; c++) {
+                if (grid[r][c] == 1) { //新鲜橘子数初始化
+                    count++;
+                } else if (grid[r][c] == 2) { //腐烂的橘子的位置放在队列里面
+                    queue.add(new int[]{r, c});
+                }
+            }
+        }
+
+        int round = 0; //round表示腐烂的轮数，或者分钟数
+        while (count > 0 && !queue.isEmpty()) {
+            round++; //新鲜橘子有 并且有腐烂橘子
+            int n = queue.size(); //腐烂橘子数
+            for (int i = 0; i < n; i++) {
+                int[] orange = queue.poll();
+                int r = orange[0];
+                int c = orange[1];
+                if (r-1>=0 && grid[r-1][c] == 1) {//上边新鲜橘子被污染
+                    grid[r-1][c] = 2;
+                    count--;
+                    queue.add(new int[]{r - 1, c});//新增腐烂橘子
+                }
+                if (r + 1 < M && grid[r + 1][c] == 1) {//下
+                    grid[r+1][c] = 2;
+                    count --;
+                    queue.add(new int[]{r + 1, c});
+                }
+                if (c - 1 >= 0 && grid[r][c - 1] == 1) {//左
+                    grid[r][c-1] = 2;
+                    count--;
+                    queue.add(new int[]{r, c - 1});
+                }
+                if (c + 1 < N && grid[r][c + 1] ==1) {//右
+                    grid[r][c+1] = 2;
+                    count--;
+                    queue.add(new int[]{r, c + 1});
+                }
+            }
+
+        }
+
+        return count > 0 ? -1 : round;
     }
 
     public static void main(String[] args) {
