@@ -2,20 +2,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class otherLc204 {
-    public int countPrimesV1(int n) { //超出时间范围
-        int ans = 0;
-        ArrayList<Integer> res = new ArrayList<>();
-        for (int i = 2; i < n; i++) {
-            boolean check = check(i);
-            if (check) {
-                res.add(i);
-                ans += 1;
-            }
-        }
-        System.out.println(res);
-        return ans;
-    }
-
     public static boolean check(int n) {
         int prime = 2;
         while (prime <=  Math.sqrt(n)) {
@@ -50,5 +36,19 @@ public class otherLc204 {
         otherLc204 solution = new otherLc204();
         int i = solution.countPrimes(10);
         System.out.println(i);
+    }
+
+    public int countPrimesV1(int n) { //超出时间范围
+        int ans = 0;
+        ArrayList<Integer> res = new ArrayList<>();
+        for (int i = 2; i < n; i++) {
+            boolean check = check(i);
+            if (check) {
+                res.add(i);
+                ans += 1;
+            }
+        }
+        System.out.println(res);
+        return ans;
     }
 }

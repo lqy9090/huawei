@@ -2,19 +2,6 @@
 import java.util.Scanner;
 
 public class hj33converScale {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNext()) {
-            String str = scanner.nextLine();
-            hj33converScale main = new hj33converScale();
-            String convert = main.convert(str);
-            System.out.println(convert);
-//            if(str.contains(".")) ipToNum(str);
-//            else numToIp(str);
-        }
-
-    }
-
     public static void ipToNum(String ip) {
         String[] numStrs = ip.split("\\.");
         StringBuilder builder = new StringBuilder();
@@ -56,6 +43,20 @@ public class hj33converScale {
         System.out.println(builder.deleteCharAt(builder.length()-1));
     }
 
+
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNext()) {
+            String str = scanner.nextLine();
+            hj33converScale main = new hj33converScale();
+            String convert = main.convert(str);
+            System.out.println(convert);
+//            if(str.contains(".")) ipToNum(str);
+//            else numToIp(str);
+        }
+
+    }
     private final int N = 4;
 
     public String convert(String str) {
